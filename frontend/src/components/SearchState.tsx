@@ -29,12 +29,14 @@ export default function SearchState({
   searchRef,
 }: Props) {
   const [queryData, setQueryData] = useState<any>([]);
+  const [numResults, setNumResults] = useState<number>(0);
   const [timeTaken, setTimeTaken] = useState<any>("");
 
   useEffect(() => {
     if (search) {
       getData(search).then((result) => {
         setQueryData(result.data.data);
+        setNumResults(result.data.data.length);
         setTimeTaken(result.time_ms);
       });
     } else {
@@ -45,11 +47,11 @@ export default function SearchState({
 
   return (
     <div className="w-2/3 flex flex-col">
-      <h1 className="mt-4 font-semibold text-2xl text-[#363636]">
+      <h1 className="mt-4 font-semibold text-3xl text-[#363636]">
         Monosemanticity
       </h1>
-      <p className=""></p>
-      <p className=""></p>
+      <p className="text-sm font-regular text-gray-500 mt-4"></p>
+      <p className="text-sm font-regular text-gray-500 mt-2"></p>
       <div className="w-full mt-4 p-2 bg-[#F3F4F6] flex flex-row space-x-2">
         <svg
           width="20"
@@ -76,8 +78,13 @@ export default function SearchState({
           }}
         />
       </div>
-      <div>{timeTaken}ms</div>
-      <div className="mt-10 flex flex-col space-y-2">
+      <div className="p-1.5 border border-green-500 mt-4 flex flex-row space-x-1.5 bg-[#EFFDF4]">
+        <p className="text-sm font-medium text-[#363636]">
+          Found {numResults} results
+        </p>
+        <p className="text-sm font-regular text-gray-500">({timeTaken}ms)</p>
+      </div>
+      <div className="mt-8 flex flex-col space-y-2">
         {queryData.map((value: any, index: number) => {
           return <NeuronComponent key={index} data={value} />;
         })}
