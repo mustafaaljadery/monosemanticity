@@ -4,8 +4,7 @@ import os
 import time
 
 # 4095 
-
-for i in range(2268,4095):
+for i in range(4095):
     url = f'https://transformer-circuits.pub/2023/monosemantic-features/vis/a1/{i+1}.json'  # Replace with the URL you want to request
     response = requests.get(url)
 
