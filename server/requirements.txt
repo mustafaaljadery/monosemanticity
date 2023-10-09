@@ -1,0 +1,4 @@
+redis
+flask
+gunicorn
+flask_cors
