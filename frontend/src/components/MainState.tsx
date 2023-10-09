@@ -79,7 +79,7 @@ export default function MainState({
             className="my-auto p-[2px]"
           />
           <p>.</p>
-          <p>We&apos;ve also visualized Anthropic's paper, check it out</p>
+          <p>We&apos;ve also visualized Anthropic&apos;s paper, check it out</p>
           <a
             href="https://www.maxaljadery.com/writing"
             target="_blank"
