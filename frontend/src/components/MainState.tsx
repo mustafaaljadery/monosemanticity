@@ -35,7 +35,7 @@ export default function MainState({
             }}
           />
           <p className="font-medium text-[#363636] text-2xl">
-            and learn what's going on in a neural network.
+            and learn what&apos;s going on in a neural network.
           </p>
         </div>
         <div className="flex mt-5 text-sm font-regular text-gray-500 flex-row flex-wrap justify-center items-center text-center space-x-1">
