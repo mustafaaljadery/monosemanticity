@@ -33,7 +33,25 @@ def index():
         doc = json.loads(res.docs[i].json) 
         values = {}
         values["index"] = doc["index"]
-        values["act_buckets"] = doc["act_buckets"]
+        activations = []
+        for j in range(len(doc["act_buckets"])):
+            activations.append({
+                "activation": doc["act_buckets"][j],
+                "edge": doc["act_bucket_edges"][j]
+            })
+        values["activations"] = activations 
+        values["negative_logits"] = sorted(doc["logit_effects"]["negatives"], key=lambda x:x[1])[:5]
+        values["positive_logits"] = sorted(doc["logit_effects"]["positives"], key=lambda x: x[1], reverse=True)[:5]
+        values["activation_density"] = round(doc["statistics"]["density_frac"] * 100,2)
+        values["max_activation"] = doc["statistics"]["global_max_act"]
+        values["neuron_alignment"] = doc["statistics"]["abs_max_neuron_weights"]
+        logits = []
+        for j in range(len(doc["logit_buckets"])):
+            logits.append({
+                "logit": doc["logit_buckets"][j],
+                "edge": doc["logit_bucket_edges"][j]
+            })
+        values["logits"] = logits
         doc_array.append(values)
 
     data["data"] = doc_array
