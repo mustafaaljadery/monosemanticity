@@ -46,7 +46,7 @@ export default function SearchState({
   }, [search]);
 
   return (
-    <div className="w-2/3 flex flex-col">
+    <div className="w-3/4 flex flex-col">
       <h1 className="mt-4 font-semibold text-3xl text-[#363636]">
         Monosemanticity
       </h1>
@@ -84,7 +84,7 @@ export default function SearchState({
         </p>
         <p className="text-sm font-regular text-gray-500">({timeTaken}ms)</p>
       </div>
-      <div className="mt-8 flex flex-col space-y-2">
+      <div className="mt-10 flex flex-col space-y-5">
         {queryData.map((value: any, index: number) => {
           return <NeuronComponent key={index} data={value} />;
         })}
