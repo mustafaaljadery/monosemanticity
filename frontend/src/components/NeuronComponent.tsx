@@ -2,12 +2,14 @@ import ActivationsChart from "./chart/activations";
 import LogitsChart from "./chart/logits";
 import NegativeLogits from "./chart/negativeLogits";
 import PositiveLogits from "./chart/positiveLogits";
+import SampleInterval from "./chart/sampleInterval";
 
 interface Props {
   data: any;
+  searchQuery: string;
 }
 
-export default function NeuronComponent({ data }: Props) {
+export default function NeuronComponent({ data, searchQuery }: Props) {
   return (
     <div className="bg-[#F2F0EC] w-full p-6 rounded flex flex-col">
       <div className="flex flex-row w-full justify-between items-between">
@@ -26,6 +28,20 @@ export default function NeuronComponent({ data }: Props) {
             <LogitsChart data={data.logits} />
           </div>
         </div>
+      </div>
+      <hr className="my-6 w-full" />
+      <div className=""></div>
+      <hr className="my-6 w-full" />
+      <p className="font-bold text-xs text-[#363636]">SAMPLE INTERVALS</p>
+      <div className="mt-4 flex flex-row flex-wrap w-full">
+        {Array.from({ length: 11 }, (_, index) => index + 1).map((value) => {
+          return (
+            <SampleInterval
+              searchQuery={searchQuery}
+              data={data.example_quantiles[value]}
+            />
+          );
+        })}
       </div>
     </div>
   );

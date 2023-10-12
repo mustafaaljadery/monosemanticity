@@ -46,13 +46,30 @@ export default function SearchState({
   }, [search]);
 
   return (
-    <div className="w-3/4 flex flex-col">
-      <h1 className="mt-4 font-semibold text-3xl text-[#363636]">
+    <div className="w-[95%] lg:w-3/4 flex flex-col">
+      <h1 className="mt-10 font-semibold text-3xl text-[#363636]">
         Monosemanticity
       </h1>
-      <p className="text-sm font-regular text-gray-500 mt-4"></p>
-      <p className="text-sm font-regular text-gray-500 mt-2"></p>
-      <div className="w-full mt-4 p-2 bg-[#F3F4F6] flex flex-row space-x-2">
+      <div className="flex mt-4 flex-row space-x-3 flex-wrap">
+        <p className="font-medium text-gray-600">
+          Dictionary Learning Run:{" "}
+          <span className="text-[#363636] font-semibold">A/1</span>
+        </p>
+        <p className="font-medium text-gray-600">
+          L1 coefficient:{" "}
+          <span className="text-[#363636] font-semibold">0.01</span>
+        </p>
+        <p className="font-medium text-gray-600">
+          n learned sparse:{" "}
+          <span className="text-[#363636] font-semibold">4096</span>
+        </p>
+      </div>
+      <p className="text-sm font-regular text-gray-500 mt-3">
+        Try words &amp; phrases that you think would show high activations in
+        neurons <span className="font-semibold text-[#363636]">OR</span> just
+        try words you think are cool!
+      </p>
+      <div className="w-full mt-8 p-2 bg-[#F3F4F6] flex flex-row space-x-2">
         <svg
           width="20"
           height="20"
@@ -79,14 +96,14 @@ export default function SearchState({
         />
       </div>
       <div className="p-1.5 border border-green-500 mt-4 flex flex-row space-x-1.5 bg-[#EFFDF4]">
-        <p className="text-sm font-medium text-[#363636]">
-          Found {numResults} results
-        </p>
-        <p className="text-sm font-regular text-gray-500">({timeTaken}ms)</p>
+        <p className="text-sm font-medium text-[#363636]">Found results in</p>
+        <p className="text-sm font-regular text-gray-500">{timeTaken}ms</p>
       </div>
-      <div className="mt-10 flex flex-col space-y-5">
+      <div className="mt-10 pb-16 flex flex-col space-y-5">
         {queryData.map((value: any, index: number) => {
-          return <NeuronComponent key={index} data={value} />;
+          return (
+            <NeuronComponent searchQuery={search} key={index} data={value} />
+          );
         })}
       </div>
     </div>

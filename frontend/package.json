@@ -14,6 +14,7 @@
     "plotly.js": "^2.26.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-highlight-words": "^0.20.0",
     "react-plotly.js": "^2.6.0",
     "recharts": "^2.8.0"
   },
@@ -21,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-highlight-words": "^0.16.5",
     "@types/react-plotly.js": "^2.6.1",
     "autoprefixer": "^10",
     "eslint": "^8",
