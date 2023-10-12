@@ -67,10 +67,12 @@ export default function SearchState({
           Dictionary Learning Run:{" "}
           <span className="text-[#363636] font-semibold">A/1</span>
         </p>
+        <p className="font-medium text-gray-400">|</p>
         <p className="font-medium text-gray-600">
           L1 coefficient:{" "}
           <span className="text-[#363636] font-semibold">0.01</span>
         </p>
+        <p className="font-medium text-gray-400">|</p>
         <p className="font-medium text-gray-600">
           n learned sparse:{" "}
           <span className="text-[#363636] font-semibold">4096</span>
