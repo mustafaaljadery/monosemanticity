@@ -15,7 +15,7 @@ export default function NeuronComponent({ data, searchQuery }: Props) {
     <div className="bg-[#F2F0EC] w-full p-6 rounded flex flex-col">
       <div className="flex flex-row w-full justify-between items-between">
         <p className="font-semibold text-[#363636] text-base">
-          NEURON - {data.index}
+          FEATURE - {data.index}
         </p>
       </div>
       <div className="flex w-full mt-6 flex-col">
@@ -33,7 +33,18 @@ export default function NeuronComponent({ data, searchQuery }: Props) {
         </div>
       </div>
       <hr className="my-6 w-full" />
-      <p className="text-sm font-bold text-[#363636]">HIGHLIGHTED INTERVALS</p>
+      <div className="w-full flex flex-row justify-between items-between">
+        <p className="text-sm font-bold text-[#363636]">
+          HIGHLIGHTED INTERVALS
+        </p>
+        <a
+          href={`https://transformer-circuits.pub/2023/monosemantic-features/vis/a1.html?ordering=count&search_text=${searchQuery}#feature-${data.index}`}
+          target="_blank"
+          className="my-auto text-xs text-blue-500 hover:opacity-70"
+        >
+          View Ablations
+        </a>
+      </div>
       <div className="mt-4 flex flex-col space-y-6 md:space-y-0 md:flex-row md:flex-wrap w-full">
         <TopAndBottomActivations
           searchQuery={searchQuery}
