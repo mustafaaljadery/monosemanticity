@@ -147,7 +147,7 @@ export default function SearchState({
                 <div className="flex flex-col space-y-1">
                   {sortBy.map((value: any, index: number) => {
                     return (
-                      <DropdownMenuPrimitive.Item>
+                      <DropdownMenuPrimitive.Item key={index}>
                         <button
                           className={
                             "w-full focus:ring-0 focus:outline-none py-1.5 text-sm font-medium rounded hover:bg-gray-100 text-[#363636] flex flex-col justify-center items-center " +
@@ -156,7 +156,6 @@ export default function SearchState({
                           onClick={() => {
                             setSelectedSort(value);
                           }}
-                          key={index}
                         >
                           {value}
                         </button>
