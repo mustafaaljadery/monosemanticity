@@ -8,6 +8,13 @@ from redis.commands.search.query import NumericFilter, Query
 import time
 import os
 
+value = ["hello", "he", "bye"]
+string_to_count = "he"
+
+count = sum(1 for item in value if string_to_count in item)
+print(count)
+
+'''
 r = redis.Redis(
   host=os.environ['REDIS_HOST'],
   port=int(os.environ['REDIS_PORT']),
@@ -18,7 +25,7 @@ start_time = time.time()
 res = rs.search(
     Query("already")
 )
-print(res)
 end_time = time.time()
 elapsed_time_ms = (end_time - start_time) * 1000
 print(f"Execution time: {elapsed_time_ms:.2f} ms")
+'''

@@ -54,6 +54,7 @@ def index():
         values["logits"] = logits
 
         example_quantiles = []
+        occurrence = 0
 
         for j in range(len(doc["examples_quantiles"])):
             value = {}
@@ -62,12 +63,14 @@ def index():
             value["max_act"] = doc["examples_quantiles"][j]["quantile_max_act"]
 
             for k in range(len(doc["examples_quantiles"][j]["examples"])):
+                occurrence += sum(1 for item in doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"]  if query in item) 
                 examples.append([{"token_str": ts, "token_act": ta} for ts, ta in zip(doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"], doc["examples_quantiles"][j]["examples"][k]["tokens_acts_list"])])
             value["examples"] = examples
 
             example_quantiles.append(value)
 
         values["example_quantiles"] = example_quantiles
+        values["query_occurrence"] = occurrence
 
         doc_array.append(values)
 
