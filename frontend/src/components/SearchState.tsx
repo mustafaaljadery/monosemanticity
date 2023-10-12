@@ -39,8 +39,6 @@ export default function SearchState({
   searchRef,
 }: Props) {
   const [queryData, setQueryData] = useState<any>([]);
-  const [numResults, setNumResults] = useState<number>(0);
-  const [sortOpen, setSortOpen] = useState<boolean>(false);
   const [timeTaken, setTimeTaken] = useState<any>("");
   const [selectedSort, setSelectedSort] = useState<string>("Max Activations");
 
@@ -48,7 +46,6 @@ export default function SearchState({
     if (search) {
       getData(search).then((result) => {
         setQueryData(result.data.data);
-        setNumResults(result.data.data.length);
         setTimeTaken(result.time_ms);
       });
     } else {
@@ -78,7 +75,7 @@ export default function SearchState({
           <span className="text-[#363636] font-semibold">4096</span>
         </p>
       </div>
-      <p className="text-sm font-regular text-gray-500 mt-3">
+      <p className="text-xs md:text-sm font-regular text-gray-500 mt-3">
         Try words &amp; phrases that you think would show high activations in
         neurons <span className="font-semibold text-[#363636]">OR</span> just
         try words you think are cool!
@@ -101,7 +98,7 @@ export default function SearchState({
             ></path>
           </svg>
           <input
-            className="flex-1 bg-transparent focus:ring-0 focus:outline-none"
+            className="flex-1 bg-transparent text-sm md:text-base focus:ring-0 focus:outline-none"
             placeholder="Search..."
             ref={searchRef}
             value={search}
@@ -114,7 +111,7 @@ export default function SearchState({
           <DropdownMenuPrimitive.Root>
             <DropdownMenuPrimitive.Trigger asChild>
               <button className="h-full hover:opacity-90 focus:ring-0 focus:outline-none flex flex-row space-x-2 justify-center items-center px-4 bg-[#F2F0EB]">
-                <p className="text-sm font-medium text-[#363636]">
+                <p className="text-xs md:text-sm font-medium text-[#363636]">
                   {selectedSort}
                 </p>
                 <svg
