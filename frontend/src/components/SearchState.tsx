@@ -77,8 +77,8 @@ export default function SearchState({
         </p>
       </div>
       <p className="text-xs md:text-sm font-regular text-gray-500 mt-3">
-        Try words &amp; phrases that you think would show high activations in
-        neurons <span className="font-semibold text-[#363636]">OR</span> just
+        Try words &amp; phrases that you think would show high activations
+        features <span className="font-semibold text-[#363636]">OR</span> just
         try words you think are cool!
       </p>
       <div className="w-full flex flex-row mt-8 space-x-4">
