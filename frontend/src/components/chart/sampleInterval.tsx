@@ -12,9 +12,9 @@ export default function SampleInterval({ data, searchQuery }: Props) {
         {data.quantile_name} - Max Act: {data.max_act}
       </p>
       <div className="flex flex-col space-y-1 mt-3">
-        {data?.examples?.map((example: any) => {
+        {data?.examples?.map((example: any, index: number) => {
           return (
-            <div className="flex flex-col w-full space-y-1.5">
+            <div key={index} className="flex flex-col w-full space-y-1.5">
               <Highlighter
                 highlightClassName="YourHighlightClass" // Define your custom highlight class
                 className="text-[11px] font-regular text-gray-500"

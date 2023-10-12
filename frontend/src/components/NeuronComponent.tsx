@@ -37,6 +37,7 @@ export default function NeuronComponent({ data, searchQuery }: Props) {
         {Array.from({ length: 11 }, (_, index) => index + 1).map((value) => {
           return (
             <SampleInterval
+              key={value}
               searchQuery={searchQuery}
               data={data.example_quantiles[value]}
             />
