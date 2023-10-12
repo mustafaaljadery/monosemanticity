@@ -80,7 +80,7 @@ export default function MainState({
           >
             Anthropic&apos;s A/1
           </a>
-          <p>dictioary learning run.</p>
+          <p>dictionary learning run.</p>
           <p>
             We&apos;ve also simplified the original paper with visuals, check it
             out
