@@ -99,7 +99,7 @@ export default function SearchState({
         <p className="text-sm font-medium text-[#363636]">Found results in</p>
         <p className="text-sm font-regular text-gray-500">{timeTaken}ms</p>
       </div>
-      <div className="mt-10 pb-16 flex flex-col space-y-5">
+      <div className="mt-10 pb-16 flex flex-col space-y-7">
         {queryData.map((value: any, index: number) => {
           return (
             <NeuronComponent searchQuery={search} key={index} data={value} />
