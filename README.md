@@ -2,7 +2,7 @@
 
 We take the [visualization](https://transformer-circuits.pub/2023/monosemantic-features/vis/a1.html) from [Anthropic's](https://github.com/anthropics) \*Towards Monosemanticity: Decomposing Language Models With Dictionary Learning\* and make it **80x+** faster.
 
-![speed](/speed.png)
+![speed](./frontend/public/speed.png)
 
 ## How does this work?
 
