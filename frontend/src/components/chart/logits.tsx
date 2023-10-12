@@ -16,7 +16,7 @@ export default function LogitsChart({ data }: Props) {
   return (
     <div className="flex w-full flex-col space-y-3">
       <p className="font-bold text-xs text-[#363636]">LOGITS</p>
-      <ResponsiveContainer width="100%" height={140}>
+      <ResponsiveContainer width="100%" height={160}>
         <BarChart data={data}>
           <XAxis
             dataKey="edge"

@@ -17,7 +17,7 @@ export default function SampleInterval({ data, searchQuery }: Props) {
             <div key={index} className="flex flex-col w-full space-y-1.5">
               <Highlighter
                 highlightClassName="YourHighlightClass" // Define your custom highlight class
-                className="text-[11px] font-regular text-gray-500"
+                className="text-[10px] font-regular text-gray-500"
                 searchWords={[searchQuery]}
                 autoEscape={true}
                 textToHighlight={example

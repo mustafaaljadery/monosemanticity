@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useCallback,
+  useState,
+} from "react";
 import axios from "axios";
 import NeuronComponent from "./NeuronComponent";
 
@@ -32,7 +38,8 @@ export default function SearchState({
   const [numResults, setNumResults] = useState<number>(0);
   const [timeTaken, setTimeTaken] = useState<any>("");
 
-  useEffect(() => {
+  // Define a memoized search function using useCallback
+  const handleSearch = useCallback(() => {
     if (search) {
       getData(search).then((result) => {
         setQueryData(result.data.data);
@@ -43,6 +50,10 @@ export default function SearchState({
       setQueryData([]);
       setSearchState(false);
     }
+  }, [search]);
+
+  useEffect(() => {
+    handleSearch();
   }, [search]);
 
   return (

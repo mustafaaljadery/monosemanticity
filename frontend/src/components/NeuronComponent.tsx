@@ -1,3 +1,4 @@
+import TopAndBottomActivations from "./chart/TopAndBottomActivations";
 import ActivationsChart from "./chart/activations";
 import LogitsChart from "./chart/logits";
 import NegativeLogits from "./chart/negativeLogits";
@@ -13,7 +14,9 @@ export default function NeuronComponent({ data, searchQuery }: Props) {
   return (
     <div className="bg-[#F2F0EC] w-full p-6 rounded flex flex-col">
       <div className="flex flex-row w-full justify-between items-between">
-        <p className="">Neuron: {data.index}</p>
+        <p className="font-semibold text-[#363636] text-base">
+          NEURON - {data.index}
+        </p>
       </div>
       <div className="flex w-full mt-6 flex-col">
         <div className="w-full flex flex-row space-x-4">
@@ -30,9 +33,19 @@ export default function NeuronComponent({ data, searchQuery }: Props) {
         </div>
       </div>
       <hr className="my-6 w-full" />
-      <div className=""></div>
+      <p className="text-sm font-bold text-[#363636]">HIGHLIGHTED INTERVALS</p>
+      <div className="mt-4 flex flex-row flex-wrap w-full">
+        <TopAndBottomActivations
+          searchQuery={searchQuery}
+          data={data.example_quantiles[0]}
+        />
+        <TopAndBottomActivations
+          searchQuery={searchQuery}
+          data={data.example_quantiles[data.example_quantiles.length - 1]}
+        />
+      </div>
       <hr className="my-6 w-full" />
-      <p className="font-bold text-xs text-[#363636]">SAMPLE INTERVALS</p>
+      <p className="font-bold text-sm text-[#363636]">SAMPLE INTERVALS</p>
       <div className="mt-4 flex flex-row flex-wrap w-full">
         {Array.from({ length: 11 }, (_, index) => index + 1).map((value) => {
           return (
