@@ -7,7 +7,7 @@ interface Props {
 
 export default function TopAndBottomActivations({ data, searchQuery }: Props) {
   return (
-    <div className="w-1/2 flex flex-col p-4">
+    <div className="w-full md:w-1/2 flex flex-col p-2 md:p-4">
       <p className="text-base font-semibold text-[#363636]">
         {data?.quantile_name}
       </p>

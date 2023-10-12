@@ -7,7 +7,7 @@ interface Props {
 
 export default function SampleInterval({ data, searchQuery }: Props) {
   return (
-    <div className="w-1/3 flex flex-col p-4">
+    <div className="w-1/2 md:w-1/3 flex flex-col p-4">
       <p className="text-xs font-semibold text-[#363636]">
         {data?.quantile_name} - Max Act: {data?.max_act}
       </p>
