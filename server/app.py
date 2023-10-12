@@ -62,7 +62,7 @@ def index():
             value["max_act"] = doc["examples_quantiles"][j]["quantile_max_act"]
 
             for k in range(len(doc["examples_quantiles"][j]["examples"])):
-                examples = [{"token_str": ts, "token_act": ta} for ts, ta in zip(doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"], doc["examples_quantiles"][j]["examples"][k]["tokens_acts_list"])]
+                examples.append([{"token_str": ts, "token_act": ta} for ts, ta in zip(doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"], doc["examples_quantiles"][j]["examples"][k]["tokens_acts_list"])])
             value["examples"] = examples
 
             example_quantiles.append(value)
