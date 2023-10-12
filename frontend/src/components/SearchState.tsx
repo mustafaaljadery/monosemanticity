@@ -1,12 +1,16 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useCallback,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import NeuronComponent from "./NeuronComponent";
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
+import { clsx } from "clsx";
+
+const sortBy = [
+  "Max Activations",
+  "Min Activations",
+  "Avg Max Activations",
+  "Avg Min Activations",
+  "Query Occurrences",
+];
 
 async function getData(query: string) {
   try {
@@ -36,10 +40,11 @@ export default function SearchState({
 }: Props) {
   const [queryData, setQueryData] = useState<any>([]);
   const [numResults, setNumResults] = useState<number>(0);
+  const [sortOpen, setSortOpen] = useState<boolean>(false);
   const [timeTaken, setTimeTaken] = useState<any>("");
+  const [selectedSort, setSelectedSort] = useState<string>("Max Activations");
 
-  // Define a memoized search function using useCallback
-  const handleSearch = useCallback(() => {
+  useEffect(() => {
     if (search) {
       getData(search).then((result) => {
         setQueryData(result.data.data);
@@ -50,10 +55,6 @@ export default function SearchState({
       setQueryData([]);
       setSearchState(false);
     }
-  }, [search]);
-
-  useEffect(() => {
-    handleSearch();
   }, [search]);
 
   return (
@@ -80,31 +81,91 @@ export default function SearchState({
         neurons <span className="font-semibold text-[#363636]">OR</span> just
         try words you think are cool!
       </p>
-      <div className="w-full mt-8 p-2 bg-[#F3F4F6] flex flex-row space-x-2">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 15 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="my-auto"
-        >
-          <path
-            d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
-            fill="#363636"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-        <input
-          className="flex-1 bg-transparent focus:ring-0 focus:outline-none"
-          placeholder="Search..."
-          ref={searchRef}
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+      <div className="w-full flex flex-row mt-8 space-x-4">
+        <div className="w-full flex-1 p-2 bg-[#F3F4F6] flex flex-row space-x-2">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="my-auto"
+          >
+            <path
+              d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+              fill="#363636"
+              fillRule="evenodd"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+          <input
+            className="flex-1 bg-transparent focus:ring-0 focus:outline-none"
+            placeholder="Search..."
+            ref={searchRef}
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
+        <div className="">
+          <DropdownMenuPrimitive.Root>
+            <DropdownMenuPrimitive.Trigger asChild>
+              <button className="h-full hover:opacity-90 focus:ring-0 focus:outline-none flex flex-row space-x-2 justify-center items-center px-4 bg-[#F2F0EB]">
+                <p className="text-sm font-medium text-[#363636]">
+                  {selectedSort}
+                </p>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="my-auto"
+                >
+                  <path
+                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                    fill="#363636"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </DropdownMenuPrimitive.Trigger>
+            <DropdownMenuPrimitive.Portal>
+              <DropdownMenuPrimitive.Content
+                align="end"
+                sideOffset={5}
+                className={clsx(
+                  "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+                  "w-48 rounded-lg px-1.5 py-1.5 shadow-md md:w-56",
+                  "bg-white"
+                )}
+              >
+                <div className="flex flex-col space-y-1">
+                  {sortBy.map((value: any, index: number) => {
+                    return (
+                      <DropdownMenuPrimitive.Item>
+                        <button
+                          className={
+                            "w-full focus:ring-0 focus:outline-none py-1.5 text-sm font-medium rounded hover:bg-gray-100 text-[#363636] flex flex-col justify-center items-center " +
+                            (selectedSort == value && "bg-gray-100")
+                          }
+                          onClick={() => {
+                            setSelectedSort(value);
+                          }}
+                          key={index}
+                        >
+                          {value}
+                        </button>
+                      </DropdownMenuPrimitive.Item>
+                    );
+                  })}
+                </div>
+              </DropdownMenuPrimitive.Content>
+            </DropdownMenuPrimitive.Portal>
+          </DropdownMenuPrimitive.Root>
+        </div>
       </div>
       <div className="p-1.5 border border-green-500 mt-4 flex flex-row space-x-1.5 bg-[#EFFDF4]">
         <p className="text-sm font-medium text-[#363636]">Found results in</p>
