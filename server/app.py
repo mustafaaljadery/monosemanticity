@@ -52,6 +52,21 @@ def index():
                 "edge": doc["logit_bucket_edges"][j]
             })
         values["logits"] = logits
+
+        example_quantiles = []
+
+        for j in range(len(doc["examples_quantiles"])):
+            value = {}
+            examples = []
+            value["quantile_name"] = doc["examples_quantiles"][j]["quantile_name"]
+            value["max_act"] = doc["examples_quantiles"][j]["quantile_max_act"]
+
+            for k in range(len(doc["examples_quantiles"][j]["examples"])):
+                examples = [{"token_str": ts, "token_act": ta} for ts, ta in zip(doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"], doc["examples_quantiles"][j]["examples"][k]["tokens_acts_list"])]
+            value["examples"] = examples
+
+        values["example_quantiles"] = example_quantiles
+
         doc_array.append(values)
 
     data["data"] = doc_array
