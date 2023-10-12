@@ -65,6 +65,8 @@ def index():
                 examples = [{"token_str": ts, "token_act": ta} for ts, ta in zip(doc["examples_quantiles"][j]["examples"][k]["tokens_str_list"], doc["examples_quantiles"][j]["examples"][k]["tokens_acts_list"])]
             value["examples"] = examples
 
+            example_quantiles.append(value)
+
         values["example_quantiles"] = example_quantiles
 
         doc_array.append(values)
