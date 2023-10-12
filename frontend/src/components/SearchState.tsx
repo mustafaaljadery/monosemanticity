@@ -5,11 +5,12 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { clsx } from "clsx";
 
 const sortBy = [
-  "Max Activations",
-  "Min Activations",
-  "Avg Max Activations",
-  "Avg Min Activations",
-  "Query Occurrences",
+  "Max Activation",
+  "Min Activation",
+  "Avg Max Activation",
+  "Avg Min Activation",
+  "Max Occurrence",
+  "Min Occurrence",
 ];
 
 async function getData(query: string) {
@@ -40,7 +41,7 @@ export default function SearchState({
 }: Props) {
   const [queryData, setQueryData] = useState<any>([]);
   const [timeTaken, setTimeTaken] = useState<any>("");
-  const [selectedSort, setSelectedSort] = useState<string>("Max Activations");
+  const [selectedSort, setSelectedSort] = useState<string>("Max Activation");
 
   useEffect(() => {
     if (search) {
@@ -170,11 +171,55 @@ export default function SearchState({
         <p className="text-sm font-regular text-gray-500">{timeTaken}ms</p>
       </div>
       <div className="mt-10 pb-16 flex flex-col space-y-7">
-        {queryData.map((value: any, index: number) => {
-          return (
-            <NeuronComponent searchQuery={search} key={index} data={value} />
-          );
-        })}
+        {queryData
+          .sort((a: any, b: any) => {
+            if (selectedSort == "Max Activation") {
+              return b.max_activation - a.max_activation;
+            } else if (selectedSort == "Min Activation") {
+              return a.max_activation - b.max_activation;
+            } else if (selectedSort == "Avg Max Activation") {
+              const a1 = a.example_quantiles
+                .map((value: any) => value.max_act)
+                .reduce(
+                  (acc: any, currentValue: any, index: any, array: any) =>
+                    acc + currentValue / array.length,
+                  0
+                );
+              const b1 = b.example_quantiles
+                .map((value: any) => value.max_act)
+                .reduce(
+                  (acc: any, currentValue: any, index: any, array: any) =>
+                    acc + currentValue / array.length,
+                  0
+                );
+              return b1 - a1;
+            } else if (selectedSort == "Avg Min Activation") {
+              const a1 = a.example_quantiles
+                .map((value: any) => value.max_act)
+                .reduce(
+                  (acc: any, currentValue: any, index: any, array: any) =>
+                    acc + currentValue / array.length,
+                  0
+                );
+              const b1 = b.example_quantiles
+                .map((value: any) => value.max_act)
+                .reduce(
+                  (acc: any, currentValue: any, index: any, array: any) =>
+                    acc + currentValue / array.length,
+                  0
+                );
+              return a1 - b1;
+            } else if (selectedSort == "Max Occurrence") {
+              return b.query_occurrence - a.query_occurrence;
+            } else {
+              return a.query_occurrence - b.query_occurrence;
+            }
+          })
+          .map((value: any, index: number) => {
+            return (
+              <NeuronComponent searchQuery={search} key={index} data={value} />
+            );
+          })}
       </div>
     </div>
   );

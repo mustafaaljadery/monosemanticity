@@ -29,7 +29,6 @@ export default function LogitsChart({ data }: Props) {
               fontSize: "10px",
             }}
           />
-          <Tooltip />
           <Bar type="monotone" dataKey="logit">
             {data.map((datum: any, entry: any, index: any) => (
               <Cell

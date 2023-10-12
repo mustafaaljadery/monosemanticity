@@ -29,7 +29,6 @@ export default function ActivationsChart({ data }: Props) {
               fontSize: "10px",
             }}
           />
-          <Tooltip />
           <Bar fill="#FEAA69" type="monotone" dataKey="activation" />
         </BarChart>
       </ResponsiveContainer>
